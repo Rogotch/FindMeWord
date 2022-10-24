@@ -54,9 +54,12 @@ func get_final_array(words_letters, conditions_letters):
 	for word in first_step_array:
 		var append_flag = true
 		for letter in conditions_letters.keys():
-#			print(letter in word)
-			append_flag = (((not letter in word) && conditions_letters[letter] == false) 
-							||  (letter in word && conditions_letters[letter]))
+			print()
+			print(letter in word)
+			print(((not letter in word) && conditions_letters[letter] == false))
+			print((letter in word && conditions_letters[letter]))
+			append_flag = (append_flag && (((not letter in word) && conditions_letters[letter] == false) 
+							||  (letter in word && conditions_letters[letter])))
 #			append_flag = append_flag && letter in word && conditions_letters[letter]
 		if append_flag:
 			final_words.append(word)
