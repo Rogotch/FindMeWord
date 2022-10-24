@@ -1,0 +1,168 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/EnterText.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/CounterSetter.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/words_counter.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/words_display.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/letters_flags_container.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/MainScene.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/add_letter_flag.gd" type="Script" id=7]
+[ext_resource path="res://images/plus.png" type="Texture" id=8]
+
+[node name="MainScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+_word_line = NodePath("CenterContainer/VBoxContainer/EditLine/Line")
+_word_conditions = NodePath("CenterContainer/VBoxContainer/HBoxContainer/Conditions/letters_flags_container")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.254902, 0.247059, 0.423529, 1 )
+
+[node name="CenterContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 20.0
+margin_right = -50.0
+margin_bottom = -20.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_right = 924.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EditLine" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_right = 924.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="Line" type="HBoxContainer" parent="CenterContainer/VBoxContainer/EditLine"]
+margin_top = 32.0
+margin_right = 924.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/EditLine"]
+margin_left = 411.0
+margin_top = 68.0
+margin_right = 512.0
+margin_bottom = 91.0
+size_flags_horizontal = 6
+text = "Букв в слове:"
+
+[node name="SpinBox" type="SpinBox" parent="CenterContainer/VBoxContainer/EditLine"]
+margin_left = 425.0
+margin_top = 95.0
+margin_right = 499.0
+margin_bottom = 128.0
+size_flags_horizontal = 6
+max_value = 14.0
+align = 1
+script = ExtResource( 2 )
+_Fields = NodePath("../Line")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 132.0
+margin_right = 924.0
+margin_bottom = 560.0
+size_flags_vertical = 3
+
+[node name="WordsHolder" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_right = 460.0
+margin_bottom = 428.0
+size_flags_horizontal = 3
+
+[node name="WordsCount" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder"]
+margin_right = 460.0
+margin_bottom = 23.0
+script = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder"]
+margin_top = 27.0
+margin_right = 460.0
+margin_bottom = 60.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder/HBoxContainer"]
+margin_top = 5.0
+margin_right = 122.0
+margin_bottom = 28.0
+text = "Выводить слов: "
+
+[node name="SpinBox" type="SpinBox" parent="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder/HBoxContainer"]
+margin_left = 126.0
+margin_right = 200.0
+margin_bottom = 33.0
+max_value = 500.0
+value = 10.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder"]
+margin_top = 64.0
+margin_right = 460.0
+margin_bottom = 428.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+_words_box = NodePath("VBoxContainer")
+_words_count = NodePath("../HBoxContainer/SpinBox")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder/ScrollContainer"]
+
+[node name="Conditions" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 464.0
+margin_right = 924.0
+margin_bottom = 428.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/Conditions"]
+margin_right = 460.0
+margin_bottom = 101.0
+text = "Условия по буквам. 
+Если буква не отмечена - её нет в слове, если отмечена - она в слове есть.
+Регист не важен"
+valign = 1
+autowrap = true
+
+[node name="add_letter_flag" type="HBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Conditions"]
+margin_top = 105.0
+margin_right = 92.0
+margin_bottom = 138.0
+size_flags_horizontal = 0
+script = ExtResource( 7 )
+_Line = NodePath("LineEdit")
+
+[node name="LineEdit" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/Conditions/add_letter_flag"]
+margin_right = 58.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 1
+max_length = 1
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/Conditions/add_letter_flag"]
+margin_left = 62.0
+margin_right = 92.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 30, 0 )
+size_flags_vertical = 3
+icon = ExtResource( 8 )
+expand_icon = true
+
+[node name="letters_flags_container" type="GridContainer" parent="CenterContainer/VBoxContainer/HBoxContainer/Conditions"]
+margin_top = 142.0
+margin_right = 460.0
+margin_bottom = 142.0
+columns = 4
+script = ExtResource( 5 )
+_Letter_add_node = NodePath("../add_letter_flag")
+
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/EditLine/SpinBox" to="CenterContainer/VBoxContainer/EditLine/SpinBox" method="_on_SpinBox_value_changed"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder/HBoxContainer/SpinBox" to="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder/ScrollContainer" method="_on_SpinBox_value_changed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Conditions/add_letter_flag/Button" to="CenterContainer/VBoxContainer/HBoxContainer/Conditions/add_letter_flag" method="_on_Button_pressed"]

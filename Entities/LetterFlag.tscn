@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/LetterFlag.gd" type="Script" id=1]
+[ext_resource path="res://images/cross.png" type="Texture" id=2]
+
+[node name="LetterFlag" type="HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 80, 36 )
+size_flags_horizontal = 2
+size_flags_vertical = 0
+script = ExtResource( 1 )
+_Flag = NodePath("Flag")
+
+[node name="Flag" type="CheckBox" parent="."]
+margin_right = 24.0
+margin_bottom = 36.0
+
+[node name="Delete" type="Button" parent="."]
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 24, 0 )
+size_flags_horizontal = 10
+size_flags_vertical = 3
+icon = ExtResource( 2 )
+icon_align = 1
+expand_icon = true
+
+[connection signal="toggled" from="Flag" to="." method="update_flag"]
+[connection signal="pressed" from="Delete" to="." method="Delete"]
