@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/EnterText.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/CounterSetter.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Scripts/MainScene.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/add_letter_flag.gd" type="Script" id=7]
 [ext_resource path="res://images/plus.png" type="Texture" id=8]
+[ext_resource path="res://images/question.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/HelpButton.gd" type="Script" id=10]
 
 [node name="MainScene" type="Control"]
 anchor_right = 1.0
@@ -163,6 +165,16 @@ columns = 4
 script = ExtResource( 5 )
 _Letter_add_node = NodePath("../add_letter_flag")
 
+[node name="Help" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -34.0
+margin_bottom = 31.0
+icon = ExtResource( 9 )
+expand_icon = true
+script = ExtResource( 10 )
+
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/EditLine/SpinBox" to="CenterContainer/VBoxContainer/EditLine/SpinBox" method="_on_SpinBox_value_changed"]
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder/HBoxContainer/SpinBox" to="CenterContainer/VBoxContainer/HBoxContainer/WordsHolder/ScrollContainer" method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Conditions/add_letter_flag/Button" to="CenterContainer/VBoxContainer/HBoxContainer/Conditions/add_letter_flag" method="_on_Button_pressed"]
+[connection signal="pressed" from="Help" to="Help" method="_on_Help_pressed"]
