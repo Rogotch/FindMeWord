@@ -11,7 +11,8 @@ config_version=4
 [application]
 
 config/name="5letters"
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/MainScene.tscn"
+config/icon="res://images/question.png"
 
 [autoload]
 
