@@ -19,7 +19,7 @@ func get_text():
 	var counter = 0
 #	word = {}
 	for field in all_fields:
-		word[counter] = field.text
+		word[counter] = field.text.to_lower()
 		counter += 1
 	pass
 
